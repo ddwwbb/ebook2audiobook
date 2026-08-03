@@ -14,7 +14,7 @@
 
 ### 本地运行
 
-[![Quick Start](https://img.shields.io/badge/Quick%20Start-blue?style=for-the-badge)](#instructions)
+[![Quick Start](https://img.shields.io/badge/Quick%20Start-blue?style=for-the-badge)](#用法说明)
 
 [![Docker Build](https://github.com/DrewThomasson/ebook2audiobook/actions/workflows/Docker-Build.yml/badge.svg)](https://github.com/DrewThomasson/ebook2audiobook/actions/workflows/Docker-Build.yml)  [![Download](https://img.shields.io/badge/Download-Now-blue.svg)](https://github.com/DrewThomasson/ebook2audiobook/releases/latest)   
 
@@ -69,35 +69,38 @@ https://github.com/user-attachments/assets/81c4baad-117e-4db5-ac86-efc2b7fea921
 ![Example](https://github.com/DrewThomasson/VoxNovel/blob/dc5197dff97252fa44c391dc0596902d71278a88/readme_files/example_in_app.jpeg)
 </details>
 
-## README.md
-
 ## 目录
-- [ebook2audiobook](#-ebook2audiobook)
-- [功能](#features)
-- [图形界面](#gui-interface)
-- [演示](#demos)
-- [支持的语言](#supported-languages)
-- [最低要求](#hardware-requirements)
-- [用法](#instructions)
-  - [本地运行](#instructions)
-    - [启动 Gradio Web 界面](#instructions)
-    - [基本 Headless 用法](#basic-usage)
-    - [Headless 自定义 XTTS 模型用法](#example-of-custom-model-zip-upload)
-    - [帮助命令输出](#help-command-output)
-  - [远程运行](#run-remotely)
+- [ebook2audiobook](#-ebook2audiobook-e2a)
+- [功能](#功能)
+- [图形界面（GUI）](#图形界面gui)
+- [演示](#演示)
+- [支持的语言](#支持的语言)
+- [硬件要求](#硬件要求)
+- [用法说明](#用法说明)
+  - [本地运行](#用法说明)
+    - [启动 Gradio Web 界面](#用法说明)
+    - [基本 Headless 用法](#基本-headless-用法)
+    - [Headless 自定义 XTTS 模型用法](#自定义模型-zip-上传示例)
+    - [帮助命令输出](#帮助命令输出)
+  - [远程运行](#远程运行)
   - [Docker](#docker)
     - [运行步骤](#docker)
-  
-- [克隆声音](#cloned-voices)
-- [微调 TTS 模型](#fine-tuned-tts-models)
-  - [微调 TTS 模型集合](#fine-tuned-tts-collection)
-  - [训练 XTTSv2](#fine-tune-your-own-xttsv2-model)
-- [支持的电子书格式](#supported-ebook-formats)
-- [输出格式](#output-and-process-formats)
-- [还原到较旧版本](#reverting-to-older-versions)
-- [常见问题](#common-issues)
-- [特别鸣谢](#special-thanks)
-- [目录](#table-of-contents)
+
+- [克隆的声音](#克隆的声音)
+- [微调（fine-tuned）TTS 模型](#微调fine-tuned-tts-模型)
+  - [微调 TTS 模型集合](#微调-tts-模型集合)
+  - [微调您自己的 XTTSv2 模型](#微调您自己的-xttsv2-模型)
+- [支持的电子书格式](#支持的电子书格式)
+- [输出和处理格式](#输出和处理格式)
+- [可用的 SML 标签](#可用的-sml-标签)
+- [您自己的 Ebook2Audiobook 自定义](#您自己的-ebook2audiobook-自定义)
+- [还原到较旧版本](#还原到较旧版本)
+- [常见问题](#常见问题)
+- [路线图](#路线图)
+- [面向贡献者的 Python 代码规范化信息](#面向贡献者的-python-代码规范化信息)
+- [征求用于测试版测试的硬件捐赠](#征求用于测试版测试的硬件捐赠)
+- [特别鸣谢](#特别鸣谢)
+- [目录](#目录)
 
 
 ## 功能
@@ -107,16 +110,16 @@ https://github.com/user-attachments/assets/81c4baad-117e-4db5-ac86-efc2b7fea921
 - 🔍 针对文本页面为图像的文件的 **OCR 扫描**
 - 🔊 **高质量文本转语音**，从接近实时到接近真实的语音
 - 🗣️ 使用您自己的语音文件进行**可选的语音克隆**
-- 🌐 **支持 1158 种语言** ([supported languages list](https://dl.fbaipublicfiles.com/mms/tts/all-tts-languages.html))
+- 🌐 **支持 1158 种语言** ([支持语言列表](https://dl.fbaipublicfiles.com/mms/tts/all-tts-languages.html))
 - 💻 **低资源友好** — 可在 **2 GB RAM / 1 GB VRAM（最低）** 上运行
-- 🎵 **有声书输出格式**： mono or stereo `aac`, `flac`, `mp3`, `m4b`, `m4a`, `mp4`, `mov`, `ogg`, `wav`, `webm`
-- 🧠 **支持 SML 标签** — 对中断、停顿、语音切换等进行精细控制 ([see below](#sml-tags-available))
+- 🎵 **有声书输出格式**：单声道或立体声 `aac`, `flac`, `mp3`, `m4b`, `m4a`, `mp4`, `mov`, `ogg`, `wav`, `webm`
+- 🧠 **支持 SML 标签** — 对中断、停顿、语音切换等进行精细控制 ([见下文](#可用的-sml-标签))
 - 🧩 使用您自己训练的模型的**可选自定义模型** (XTTSv2, VITS, FAIRSEQ, PIPER, others on request)
 - 🎛️ 由 E2A 团队训练的**微调预设模型**<br/>
      <i>（如果您需要额外的微调模型，或者如果您想在官方预设列表中分享您自己的模型，请联系我们）</i>
 
 
-##  硬件要求
+## 硬件要求
 - RAM 最低 2GB，推荐 8GB。
 - VRAM 最低 1GB，推荐 4GB。
 - 在 windows 上运行时启用虚拟化（仅限 Docker）。
@@ -165,8 +168,8 @@ https://github.com/user-attachments/assets/81c4baad-117e-4db5-ac86-efc2b7fea921
 因此，您应该首先手动删除任何不想转换为音频的文本。**
 
 
-### Instructions 
-1. **Clone repo**
+### 用法说明
+1. **克隆仓库**
 	```bash
 	git clone https://github.com/DrewThomasson/ebook2audiobook.git
 	cd ebook2audiobook
@@ -174,27 +177,27 @@ https://github.com/user-attachments/assets/81c4baad-117e-4db5-ac86-efc2b7fea921
 
 2. **安装 / 运行 ebook2audiobook**：
 
-   - **Linux/MacOS**  
+   - **Linux/MacOS**
      ```bash
      ./ebook2audiobook.command
      ```
-     <i>Note for MacOS users: homebrew is installed to install missing programs.</i>
-     
-   - **Mac 启动器**  
+     <i>MacOS 用户注意：会自动安装 homebrew 以补齐缺失的程序。</i>
+
+   - **Mac 启动器**
      双击 `Mac Ebook2Audiobook Launcher.command`
 
 
-   - **Windows**  
+   - **Windows**
      ```bash
      ebook2audiobook.cmd
      ```
-     or
-     Double click `ebook2audiobook.cmd`
+     或
+     双击 `ebook2audiobook.cmd`
 
      <i>Windows 用户注意：将安装 scoop 以在没有管理员权限的情况下安装缺失的程序。</i>
-   
-1. **打开 Web 应用**：点击终端中提供的 URL，以访问 Web 应用并转换电子书。 `http://localhost:7860/`
-2. **获取公共链接**：
+
+3. **打开 Web 应用**：点击终端中提供的 URL，以访问 Web 应用并转换电子书。 `http://localhost:7860/`
+4. **获取公共链接**：
    `./ebook2audiobook.command --share` (Linux/MacOS)
    `ebook2audiobook.cmd --share` (Windows)
    `python app.py --share` (all OS)
@@ -203,7 +206,7 @@ https://github.com/user-attachments/assets/81c4baad-117e-4db5-ac86-efc2b7fea921
 **如果脚本被停止并再次运行，您需要刷新您的 Gradio GUI 界面<br>
 以便网页能够重新连接到新的连接套接字。**
 
-### Basic  Usage
+### 基本 Headless 用法
    - **Linux/MacOS**:
      ```bash
      ./ebook2audiobook.command --headless --ebook <path_to_ebook_file> --voice <path_to_voice_file> --language <language_code>
@@ -220,8 +223,8 @@ https://github.com/user-attachments/assets/81c4baad-117e-4db5-ac86-efc2b7fea921
     也支持 2 个字母的 ISO-639-1 代码。
 
 
-###  Example of Custom Model Zip Upload
-  (must be a .zip file containing the mandatory model files. Example for XTTSv2: config.json, model.pth, vocab.json and ref.wav)
+### 自定义模型 Zip 上传示例
+  （必须是 .zip 文件，包含必需的模型文件。以 XTTSv2 为例：config.json、model.pth、vocab.json 和 ref.wav）
    - **Linux/MacOS**
      ```bash
      ./ebook2audiobook.command --headless --ebook <ebook_file_path> --language <language> --custom_model <custom_model_path>
@@ -230,13 +233,13 @@ https://github.com/user-attachments/assets/81c4baad-117e-4db5-ac86-efc2b7fea921
      ```bash
      ebook2audiobook.cmd --headless --ebook <ebook_file_path> --language <language> --custom_model <custom_model_path>
      ```
-     <i>Note: the ref.wav of your custom model is always the voice selected for the conversion</i>
+     <i>注意：自定义模型的 ref.wav 始终是转换时所选择的语音</i>
      
 - **<custom_model_path>**：`model_name.zip` 文件的路径，
       该文件必须（根据 tts 引擎）包含所有必需文件<br>
       （参见 ./lib/models.py）。
 
-### For Detailed Guide with list of all Parameters to use
+### 帮助命令输出
    - **Linux/MacOS**
      ```bash
      ./ebook2audiobook.command --help
@@ -245,7 +248,7 @@ https://github.com/user-attachments/assets/81c4baad-117e-4db5-ac86-efc2b7fea921
      ```bash
      ebook2audiobook.cmd --help
      ```
-   - **Or for all OS**
+   - **或适用于所有系统**
     ```python
      app.py --help
     ```
@@ -369,12 +372,12 @@ SML tags available:
 提示：如果需要稍长的停顿，请添加 '[pause:3]' 表示 3 秒等。
 
 ### Docker
-1. **Clone the Repository**:
+1. **克隆仓库**：
 ```bash
    git clone https://github.com/DrewThomasson/ebook2audiobook.git
    cd ebook2audiobook
 ```
-2. **Build the container**
+2. **构建容器**
 ```bash
     Windows:
         Docker:
@@ -391,7 +394,7 @@ SML tags available:
         Podman Compose:
             ./ebook2audiobook.command --script_mode build_docker --docker_mode podman
 ```
-4. **Run the Container:**
+4. **运行容器：**
 ```bash
 Docker run image:
     Gradio/GUI:
@@ -427,7 +430,7 @@ Podman Compose (i.e. cuda 12.8:
         Run Headless mode:
                DEVICE_TAG=cu128 podman-compose -f podman-compose.yml --profile gpu run --rm ebook2audiobook-gpu --headless --ebook "/app/ebooks/myfile.pdf" --voice /app/voices/eng/adult/female/some_voice.wav etc..
 ```
-- NOTE: MPS is not exposed in docker so CPU must be used
+- 注意：Docker 中不暴露 MPS，因此必须使用 CPU
 
 ## 克隆的声音
 您可以上传任何支持的音频格式的任何语音音频，理想的持续时间约为1至5分钟。
@@ -454,13 +457,13 @@ Podman Compose (i.e. cuda 12.8:
 对于自定义 XTTSv2 模型，必须提供语音的参考音频片段：
 
 ## 您自己的 Ebook2Audiobook 自定义
-您可以自由修改 libs/conf.py 以添加或删除您想要的设置。如果您打算这样做，只需制作
+您可以自由修改 lib/conf.py 以添加或删除您想要的设置。如果您打算这样做，只需制作
 原始 conf.py 的副本，这样在每次更新 ebook2audiobook 时，您可以备份修改后的 conf.py 并恢复
 原始文件。您必须为 models.py 计划相同的流程。如果您想将自己的自定义模型
 变成官方微调的 ebook2audiobook 模型，请联系我们，我们会将其添加到预设列表中。
 
-## Reverting to older Versions
-Releases can be found -> [here](https://github.com/DrewThomasson/ebook2audiobook/releases)
+## 还原到较旧版本
+发布版本可在此查看 -> [此处](https://github.com/DrewThomasson/ebook2audiobook/releases)
 ```bash
 git checkout tags/VERSION_NUM # Locally/Compose -> Example: git checkout tags/v25.7.7
 ```
@@ -506,16 +509,16 @@ git checkout tags/VERSION_NUM # Locally/Compose -> Example: git checkout tags/v2
 - [ ] 至少为 xttsv2、fairseq、vits、piper 添加欧洲葡萄牙语语言模型（欢迎帮助）
 - [ ] 至少为 xttsv2、fairseq、vits、piper 添加信德语语言模型（欢迎帮助）
 
-#### TTS引擎
+#### TTS 引擎
 - [x] XTTSv2
-- [x] 巴克
-- [x] 公平交易
+- [x] Bark
+- [x] Fairseq
 - [x] VITS
 - [x] Tacotron2
 - [x] YourTTS
-- [x] 陸龜
+- [x] Tortoise
 - [x] GlowTTS
-- [x] 胡椒属
+- [x] Piper
 - [ ] GPT-SoVITS (https://github.com/RVC-Boss/GPT-SoVITS)
 - [ ] OpenVoice (https://github.com/myshell-ai/OpenVoice)
 - [ ] fish-speech (https://github.com/fishaudio/fish-speech)
@@ -530,39 +533,39 @@ git checkout tags/VERSION_NUM # Locally/Compose -> Example: git checkout tags/v2
 - [ ] Kokoro-TTS (https://github.com/hexgrad/kokoro)
 - [ ] OmniVoice (https://github.com/k2-fsa/OmniVoice)
 - [ ] Zonos (https://github.com/Zyphra/Zonos)
-- [ ] 样式-TTS2 (https://github.com/yl4579/StyleTTS2)
+- [ ] Style-TTS2 (https://github.com/yl4579/StyleTTS2)
 - [ ] Orpheus-TTS (https://github.com/canopyai/Orpheus-TTS)
 - [ ] NewTTS (https://github.com/neuphonic/neutts?tab=readme-ov-file)
 - [ ] VIbeVoice (https://github.com/vibevoice-community/VibeVoice)
 - [ ] Qwen3-TTS (https://huggingface.co/spaces/Qwen/Qwen3-TTS)
 
 #### Readme 翻译
-- [x] 阿拉伯语(ara)
-- [x] Chinese (zho)
-- [x] English (eng)
-- [x] Spanish (spa)
-- [x] French (fra)
-- [x] 德语(deu)
-- [x] Italian (ita)
-- [x] Portuguese (por)
-- [x] Polish (pol)
-- [x] 土耳其语(TUR)
-- [x] Russian (rus)
-- [x] Dutch (nld)
-- [x] 捷克语（ ces ）
-- [x] Japanese (jpn)
-- [x] Hindi (hin)
-- [x] Bengali (ben)
-- [x] 匈牙利语(HUN)
-- [x] Korean (kor)
-- [x] 越南语（ VIE ）
-- [x] Swedish (swe)
-- [x] 波斯语(fas)
-- [x] 约鲁巴语（ yor ）
-- [x] 斯瓦希里语(swa)
-- [x] 印尼语（印尼）
-- [x] Slovak (slk)
-- [x] 克罗地亚语(hrv)
+- [x] 阿拉伯语 (ara)
+- [x] 中文 (zho)
+- [x] 英语 (eng)
+- [x] 西班牙语 (spa)
+- [x] 法语 (fra)
+- [x] 德语 (deu)
+- [x] 意大利语 (ita)
+- [x] 葡萄牙语 (por)
+- [x] 波兰语 (pol)
+- [x] 土耳其语 (tur)
+- [x] 俄语 (rus)
+- [x] 荷兰语 (nld)
+- [x] 捷克语 (ces)
+- [x] 日语 (jpn)
+- [x] 印地语 (hin)
+- [x] 孟加拉语 (ben)
+- [x] 匈牙利语 (hun)
+- [x] 韩语 (kor)
+- [x] 越南语 (vie)
+- [x] 瑞典语 (swe)
+- [x] 波斯语 (fas)
+- [x] 约鲁巴语 (yor)
+- [x] 斯瓦希里语 (swa)
+- [x] 印尼语 (ind)
+- [x] 斯洛伐克语 (slk)
+- [x] 克罗地亚语 (hrv)
 
 #### 🐍 操作系统兼容性
 - [x] 🍎 Mac Intel x86
@@ -626,9 +629,9 @@ if config['default_role'] in roles:
 
 ## 征求用于测试版测试的硬件捐赠
 我们接受任何类型的硬件来测试我们的开发，例如：
-- Nvidia supporting cuda >= 11.8
-- XPU intel cards
-- ROCm AMD cards supporting ROCm >=5.7
+- 支持 CUDA >= 11.8 的 Nvidia 显卡
+- Intel XPU 显卡
+- 支持 ROCm >= 5.7 的 AMD ROCm 显卡
 
 @DrewThomasson 如果您想以任何方式提供帮助！ 😃
 <!--
