@@ -1,0 +1,30 @@
+# Audiobook Studio — Docker Compose
+#
+# Usage:
+#   docker compose up -d
+#   # Open http://localhost:7860
+#
+# For RK3588 / ARM64:
+#   docker build -f docker/Dockerfile.arm64 -t audiobook-studio:arm64 .
+#   docker run -p 7860:7860 -v ./books:/books -v ./output:/output audiobook-studio:arm64
+
+services:
+  audiobook-studio:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    ports:
+      - "7860:7860"
+    volumes:
+      # Book input directory
+      - ./books:/books:ro
+      # Output directory (generated audiobooks)
+      - ./output:/app/output
+      # Config persistence
+      - ./config:/root/.audiobook-studio
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:7860/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
