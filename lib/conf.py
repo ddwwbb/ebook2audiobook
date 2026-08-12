@@ -33,8 +33,6 @@ cli_options = [
 ]
 
 workflow_id = 'ba800d22-ee51-11ef-ac34-d4ae52cfd9ce'
-fernet_key = '0TkxI0iP0jmhT0vJ-AUpM2U4SAX3urVtrx1q8lwTynI='
-fernet_data = b'gAAAAABptJuHZS_rMQRTmqzy-i5UFTh6HqcbklSV6oZsRpZXa7uSEveAMv1daIFzzeeWZW0wDV-frFlzk_gJPc5tr_YVKW-Eg8evw9Wll1rWrvIAfT0YQywaUe188qP1dg-GOJDM7Ul1'
 
 # ---------------------------------------------------------------------
 # Version and runtime config

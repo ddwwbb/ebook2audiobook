@@ -101,7 +101,7 @@ https://github.com/user-attachments/assets/81c4baad-117e-4db5-ac86-efc2b7fea921
 
 
 ## Features
-- 🔧 **TTS Engines supported**: `XTTSv2`, `Bark`, `Fairseq`, `VITS`, `Tacotron2`, `Tortoise`, `GlowTTS`, `YourTTS`
+- 🔧 **TTS Engines supported**: `XTTSv2`, `Bark`, `Fairseq`, `VITS`, `Tacotron2`, `Tortoise`, `GlowTTS`, `YourTTS`, `AI Voice`
 - 📚 **Convert multiple file formats**: `.epub`, `.mobi`, `.azw3`, `.fb2`, `.lrf`, `.rb`, `.snb`, `.tcr`, `.pdf`, `.txt`, `.rtf`, `.doc`, `.docx`, `.html`, `.odt`, `.azw`, `.tiff`, `.tif`, `.png`, `.jpg`, `.jpeg`, `.bmp`, `.zip`
 - 💻 **TextArea** to convert directly a short text in audio
 - 🔍 **OCR scanning** for files with text pages as images
@@ -237,6 +237,21 @@ to let the web page reconnect to the new connection socket.**
       (see ./lib/models.py).
 
 ### For Detailed Guide with list of all Parameters to use
+
+To use the external `ai-voice` service instead of a local model, configure its protected API and
+select the `ai_voice` engine:
+
+```bash
+export AI_VOICE_BASE_URL="http://127.0.0.1:8093"
+export AI_VOICE_API_KEY="your-random-api-key"
+export AI_VOICE_TTS_PROVIDER="edge"
+python app.py --headless --ebook /path/to/book.epub --tts_engine ai_voice
+```
+
+Optional settings are `AI_VOICE_TTS_VOICE`, `AI_VOICE_TIMEOUT_SECONDS`, and
+`AI_VOICE_MAX_AUDIO_BYTES`. The adapter validates the returned audio format and transcodes it to
+the sentence-processing format used by the audiobook pipeline.
+
    - **Linux/MacOS**
      ```bash
      ./ebook2audiobook.command --help
